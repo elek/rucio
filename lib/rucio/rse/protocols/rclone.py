@@ -131,6 +131,8 @@ class Default(protocol.RSEProtocol):
                 access_key = os.environ['S3_ACCESS_KEY']
             if 'S3_SECRET_KEY' in os.environ:
                 secret_key = os.environ['S3_SECRET_KEY']
+             if 'S3_ENDPOINT' in os.environ:
+                endpoint = os.environ['S3_ENDPOINT']
 
             if is_secure is None or access_key is None or secret_key is None:
                 credentials = get_rse_credentials()
@@ -146,7 +148,7 @@ class Default(protocol.RSEProtocol):
                 return False
 
             try:
-                cmd = 'rclone config create {0} s3 provider AWS env_auth false access_key_id {1} secret_access_key {2} region us-east-1 acl private'.format(self.hostname, access_key, secret_key)
+                cmd = 'rclone config create {0} s3 provider AWS env_auth false access_key_id {1} secret_access_key {2} region us-east-1 acl private endpoint {3}'.format(self.hostname, access_key, secret_key, endpoint)
                 self.logger(logging.DEBUG, 'rclone.init: cmd: {}'.format(cmd))
                 status, out, err = execute(cmd)
                 if status:
