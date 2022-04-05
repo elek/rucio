@@ -131,7 +131,7 @@ class Default(protocol.RSEProtocol):
                 access_key = os.environ['S3_ACCESS_KEY']
             if 'S3_SECRET_KEY' in os.environ:
                 secret_key = os.environ['S3_SECRET_KEY']
-             if 'S3_ENDPOINT' in os.environ:
+            if 'S3_ENDPOINT' in os.environ:
                 endpoint = os.environ['S3_ENDPOINT']
 
             if is_secure is None or access_key is None or secret_key is None:
